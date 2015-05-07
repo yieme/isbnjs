@@ -1,0 +1,28 @@
+{
+  "name": "isbnjs",
+  "version": "0.1.0",
+  "description": "An ISBN JavaScript Library",
+  "main": "isbn.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://yieme@github.com/yieme/isbnjs.git"
+  },
+  "keywords": [
+    "isbn",
+    "book",
+    "javascript",
+    "js"
+  ],
+  "author": "yieme",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yieme/isbnjs/issues"
+  },
+  "homepage": "https://github.com/yieme/isbnjs"
+}

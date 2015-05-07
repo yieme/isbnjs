@@ -2,9 +2,18 @@
 
 An ISBN JavaScript Library
 
+## Install
+
+```sh
+npm i isbnjs --save
+```
+
+
 ## Usage
 
 ```js
+var ISBN = require('isbnjs')
+
 var isbn10a = ISBN.parse('4873113369');
 isbn10a.isIsbn10();                       // true
 isbn10a.isIsbn13();                       // false

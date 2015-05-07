@@ -226,3 +226,5 @@ ISBN.isbn.prototype = {
   }
 };
 }());
+
+module.exports  = ISBN

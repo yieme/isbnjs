@@ -794,3 +794,6 @@ ISBN.GROUPS = {
   }
 };
 }());
+
+
+module.exports  = ISBN

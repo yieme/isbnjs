@@ -1,6 +1,6 @@
 {
   "name": "isbnjs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An ISBN JavaScript Library",
   "main": "isbn.js",
   "directories": {

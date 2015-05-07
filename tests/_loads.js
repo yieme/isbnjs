@@ -6,6 +6,6 @@ describe('package', function() {
 	var test
 
     it('loads', function() {
-        test = require('../index.js')
+        test = require('../isbn.js')
     })
 })

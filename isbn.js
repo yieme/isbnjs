@@ -227,4 +227,88 @@ ISBN.isbn.prototype = {
 };
 }());
 
-module.exports  = ISBN
+
+var BASE64_STRING = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz~'
+
+function base16to64(base16) {
+  while (base16.length % 3 != 0 && base16.length > 0) base16 = '0' + base16
+  var result = ''
+  while (base16.length > 0) {
+    var chunk   = base16.substr(base16.length-3, 3)
+    var base10  = parseInt(chunk, 16)
+    var base64a = Math.floor(base10 / 64)
+    var base64b = base10 % 64
+    result      = BASE64_STRING.substr(base64a, 1) + BASE64_STRING.substr(base64b, 1) + result
+//		console.log(chunk, base10, base64a, base64b, result)
+    base16      = base16.substr(0, base16.length-3)
+  }
+  return result
+}
+
+function base64to16(base64) {
+  while (base64.length % 2 != 0 && base64.length > 0) base64 = '0' + base64
+  var result = ''
+  while (base64.length > 0) {
+    var chunk   = base64.substr(-2)
+    var base64a = BASE64_STRING.indexOf(chunk[0])
+    var base64b = BASE64_STRING.indexOf(chunk[1])
+    var base10  = base64a * 64 + base64b
+    var base16  = '00' + base10.toString(16)
+    result      = base16.substr(-3) + result
+//		console.log(base64a, base64b, base10, base16, result)
+    base64      = base64.substr(0, base64.length-2)
+  }
+  if (result.length %2 == 1 && result[0] == '0') {
+    result = result.substr(1)
+  }
+  return result
+}
+
+
+function isbnTo16(isbn) {
+  if ('string' === typeof isbn) isbn = parseInt(isbn)
+  return isbn.toString(16)
+}
+
+function isbnFrom16(isbn16) {
+  var isbn = parseInt(isbn16, 16)
+  var len  = (isbn.length < 11) ? 10 : 13
+  for (; isbn.length < len;) {
+    isbn = '0' + isbn // restore leading 0's
+  }
+  return isbn
+}
+
+function isbnTo36(isbn) {
+  if ('string' === typeof isbn) isbn = parseInt(isbn)
+  return isbn.toString(36)
+}
+
+function isbnFrom36(isbn36) {
+  var isbn = parseInt(isbn36, 36)
+  var len  = (isbn.length < 11) ? 10 : 13
+  for (; isbn.length < len;) {
+    isbn = '0' + isbn // restore leading 0's
+  }
+  return isbn
+}
+
+function isbnTo64(isbn) {
+  var isbn16 = isbnTo16(isbn)
+  return base16to64(isbn16)
+}
+
+function isbnFrom64(isbn64) {
+  var isbn16 = base64to16(isbn64)
+  return isbnFrom16(isbn16)
+}
+
+
+
+module.exports        = ISBN
+module.exports.to16   = isbnTo16
+module.exports.from16 = isbnFrom16
+module.exports.to36   = isbnTo36
+module.exports.from36 = isbnFrom36
+module.exports.to64   = isbnTo64
+module.exports.from64 = isbnFrom64
